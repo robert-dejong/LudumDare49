@@ -1,0 +1,33 @@
+Unstable bridge:
+	- Drive across an endless(?) bridge slowly tearing apart
+	- Parts of the bridge in front of the player starts cracking and tearing off, the player has to maneuver around to prevent falling off the bridge
+	- Powerups?
+	- Highscores? Local/online?
+	- Buy different cars with scores / cash found during gameplay -> Requires savefile
+		- Only cosmetic or with benefits?
+		
+	Pros:
+		- Relatively easy to create sprites for
+		
+	Cons:
+		- Plain
+
+
+Drunk bum:
+	- Player is wasted and has to try to walk home
+		- Player automatically sways to simulate drunkenness? Might be annoying
+		- Camera sways? Sounds extremely annoying
+		- Doublevision effect? World partly renders double with a transparancy effect applied -> POC required?
+	- Avoid obstacles? Fires, used needles, people?
+	- Powerups, hiscores?
+	
+	Pros:
+		- Silly
+		- More interesting environment
+		
+	Cons:
+		- Difficult to create sprites for
+		
+
+TODO:
+- Setting to turn drunkenness effect off and/or reduce it
