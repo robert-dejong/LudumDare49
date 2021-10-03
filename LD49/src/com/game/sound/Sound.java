@@ -9,11 +9,15 @@ import com.game.Constants;
 
 public class Sound {
 	
+	public static Sound hurt = new Sound("hurt.wav");
+	public static Sound item = new Sound("item.wav");
+	public static Sound death = new Sound("death.wav");
+	
 	private AudioClip clip;
 	
 	public Sound(String file) {
 		try {
-			this.clip = Applet.newAudioClip(new File(Constants.DATA_PATH + "/sounds" + file).toURI().toURL());
+			this.clip = Applet.newAudioClip(new File(Constants.DATA_PATH + "/sounds/" + file).toURI().toURL());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

@@ -21,5 +21,9 @@ public class Background {
 	public BufferedImage getImage() {
 		return image;
 	}
+	
+	public double getX() {
+		return x;
+	}
 
 }

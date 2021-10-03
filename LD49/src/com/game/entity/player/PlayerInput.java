@@ -3,7 +3,7 @@ package com.game.entity.player;
 import java.awt.event.KeyEvent;
 
 import com.dependencyinjection.Inject;
-import com.game.Constants;
+import com.game.GameRules;
 import com.game.core.input.KeyboardInput;
 
 public class PlayerInput {
@@ -17,8 +17,11 @@ public class PlayerInput {
 	@Inject
 	private PlayerStats playerStats;
 	
+	@Inject
+	private GameRules gameRules;
+	
 	public void handleKeyInput() {
-		double speed = Constants.PLAYER_MOVEMENT_SPEED;
+		double speed = gameRules.getPlayerMovementSpeed();
 		double moveY = 0;
 		
 		if(keyboardInput.isPressed(KeyEvent.VK_UP)) {

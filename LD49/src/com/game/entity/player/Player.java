@@ -23,12 +23,23 @@ public class Player extends Entity {
 	@Override
 	public void tick() {
 		playerInput.handleKeyInput();
+		
+		super.tick();
 	}
 	
 	@Override
 	public void render(Render render) {
+		render.renderPlayer(getImageToRender());
+	}
+	
+	private BufferedImage getImageToRender() {
 		boolean useFrame1 = getMovementTicks() >= MOVEMENT_ANIMATION_TICKS / 2;
-		render.renderPlayer(useFrame1 ? Sprites.playerRight1 : Sprites.playerRight2);
+		
+		if(useFrame1) {
+			return getHurtTicks() > 0 ? Sprites.playerDamagedRight1 : Sprites.playerRight1;
+		}
+		
+		return getHurtTicks() > 0 ? Sprites.playerDamagedRight2 : Sprites.playerRight2;
 	}
 
 }

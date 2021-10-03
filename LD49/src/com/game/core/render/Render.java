@@ -116,6 +116,7 @@ public class Render extends Canvas {
 			g.setFont(new Font("Arial", Font.BOLD, 5));
 			g.setColor(Color.WHITE);
 			g.drawString(deathReason, renderX, 73);
+			g.drawString("Score: " + playerStats.getScore(), 85, 80);
 		}
 		
 		g.dispose();

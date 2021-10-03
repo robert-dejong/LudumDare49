@@ -27,6 +27,10 @@ public abstract class Task {
 		this.loop = loop;
 	}
 	
+	public void onCreate() {
+		
+	}
+	
 	protected String getName() {
 		return name;
 	}

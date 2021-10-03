@@ -1,15 +1,13 @@
 package com.game.task.tasks;
 
 import com.dependencyinjection.Inject;
+import com.game.GameRules;
 import com.game.entity.objects.CarEntity;
 import com.game.entity.player.Player;
 import com.game.task.Task;
 import com.game.world.WorldManager;
 
 public class SpawnCarTask extends Task {
-	
-	private final static int MINIMUM_DELAY_BETWEEN_SPAWNS = 200;
-	private final static int SPAWN_RATE = 200;
 
 	@Inject
 	private WorldManager worldManager;
@@ -17,10 +15,17 @@ public class SpawnCarTask extends Task {
 	@Inject
 	private Player player;
 	
+	@Inject
+	private GameRules gameRules;
+	
 	private int ticksToWait;
 	
 	public SpawnCarTask() {
 		super(1, true);
+	}
+	
+	@Override
+	public void onCreate() {
 		this.ticksToWait = getNextSpawnTicks();
 	}
 
@@ -41,7 +46,7 @@ public class SpawnCarTask extends Task {
 	}
 	
 	private int getNextSpawnTicks() {
-		return (int)(Math.random() * SPAWN_RATE) + MINIMUM_DELAY_BETWEEN_SPAWNS;
+		return (int)(Math.random() * gameRules.getCarSpawnRate()) + gameRules.getMinimumCarSpawnRate();
 	}
 
 }

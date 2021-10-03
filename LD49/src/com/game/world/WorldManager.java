@@ -9,18 +9,23 @@ public class WorldManager {
 	
 	private ArrayList<Background> backgrounds;
 	private ArrayList<Entity> entities;
+	private ArrayList<Entity> entitiesToRemove;
 	
 	public WorldManager() {
+		this.backgrounds = new ArrayList<Background>();
 		this.entities = new ArrayList<Entity>();
+		this.entitiesToRemove = new ArrayList<Entity>();
 	}
 	
 	public void init() {
-		this.backgrounds = BackgroundGenerator.Generate();
 		spawnEntities();
 	}
 	
 	public void tick() {
 		entities.forEach((entity) -> {
+			if(entity == null)
+				return;
+			
 			entity.tick();
 		});
 	}
@@ -31,6 +36,9 @@ public class WorldManager {
 		});
 		
 		entities.forEach((entity) -> {
+			if(entity == null)
+				return;
+			
 			entity.render(render);
 		});
 	}
@@ -42,13 +50,21 @@ public class WorldManager {
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
+	
+	public ArrayList<Entity> getEntitiesToRemove() {
+		return entitiesToRemove;
+	}
+	
+	public ArrayList<Background> getBackgrounds() {
+		return backgrounds;
+	}
 
 	public void addEntity(Entity entity) {
 		entities.add(entity);
 	}
 	
 	public void removeEntity(Entity entity) {
-		entities.remove(entity);
+		entitiesToRemove.add(entity);
 	}
 	
 }

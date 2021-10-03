@@ -8,7 +8,6 @@ public class Constants {
 	public final static int RENDER_SCALE = 4;
 	
 	public final static int TILE_SIZE = 16;
-	public final static int ITEM_SIZE = 16;
 	
 	public final static int SCREEN_WIDTH = 800;
 	public final static int SCREEN_HEIGHT = 640;
@@ -19,8 +18,9 @@ public class Constants {
 	public final static int MAX_Y_POSITION = SCREEN_HEIGHT / RENDER_SCALE;
 	
 	public final static int PLAYER_MAX_HEALTH = 15;
-	public final static double PLAYER_MOVEMENT_SPEED = 1.0;
 	
 	public final static int SCORE_INCREASE_RATE = 3;
-	public final static double CAR_SPEED = 2.0;
+	
+	public final static int PICKUP_BEER_SCORE_INCREASE = 100;
+	public final static int PICKUP_NEEDLE_SCORE_INCREASE = 250;
 }

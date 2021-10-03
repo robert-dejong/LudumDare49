@@ -23,7 +23,7 @@ public class CarEntity extends Entity {
 
 	@Override
 	public void tick() {
-		move(direction == 0 ? Constants.CAR_SPEED : -(Constants.CAR_SPEED - Constants.PLAYER_MOVEMENT_SPEED), 0);
+		move(direction == 0 ? gameRules.getCarSpeed() : -(gameRules.getCarSpeed() - gameRules.getPlayerMovementSpeed()), 0);
 	}
 	
 	@Override

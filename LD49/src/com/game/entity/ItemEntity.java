@@ -1,5 +1,7 @@
 package com.game.entity;
 
+import com.game.sound.Sound;
+
 public abstract class ItemEntity extends Entity {
 	
 	private final static double FLOATING_SPEED = 0.15;
@@ -29,8 +31,8 @@ public abstract class ItemEntity extends Entity {
 
 	@Override
 	public void onCollide() {
-		System.out.println("PLAYER TOOK ITEM");
 		this.remove();
+		Sound.item.play();
 	}
 
 }

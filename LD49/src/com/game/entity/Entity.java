@@ -4,19 +4,24 @@ import java.awt.image.BufferedImage;
 
 import com.dependencyinjection.Injector;
 import com.game.Constants;
+import com.game.GameRules;
 import com.game.core.render.Render;
+import com.game.entity.player.Player;
 import com.game.entity.player.PlayerStats;
 import com.game.world.WorldManager;
 
 public abstract class Entity {
 	
 	public final static int MOVEMENT_ANIMATION_TICKS = 18;
+	public final static int HURT_TICKS = 6;
 	
 	public WorldManager worldManager = Injector.getInstance(WorldManager.class);
 	public PlayerStats playerStats = Injector.getInstance(PlayerStats.class);
+	public GameRules gameRules = Injector.getInstance(GameRules.class);
 	
 	private MovementDirection movementDirection = MovementDirection.LEFT;
 	private int movementTicks = 0;
+	private int hurtTicks = 0;
 	private double x;
 	private double y;
 	
@@ -34,7 +39,9 @@ public abstract class Entity {
 	}
 	
 	public void tick() {
-		
+		if(this.hurtTicks > 0) {
+			this.hurtTicks--;
+		}
 	}
 	
 	public void render(Render render) {
@@ -84,17 +91,17 @@ public abstract class Entity {
 		this.setY(y);
 		
 		// Check collision with other entities
-		for(int i = 0; i < worldManager.getEntities().size(); i++) {
-			Entity entity = worldManager.getEntities().get(i);
-			
+		worldManager.getEntities().forEach((entity) -> {
 			if(entity == null || entity == this)
 				return;
 			
 			if(this.collides(x, y, entity.getX(), entity.getY(), entity.getSprite().getWidth(), entity.getSprite().getHeight())) {
-				this.onCollide();
-				entity.onCollide();
+				if(this instanceof Player) {
+					this.onCollide();
+					entity.onCollide();
+				}
 			}
-		}
+		});
 	}
 	
 	public void moveToTile(int tileX, int tileY) {
@@ -102,49 +109,6 @@ public abstract class Entity {
 		double y = (tileY * Constants.TILE_SIZE) + (getSprite().getHeight() / 2);
 		moveTo(x, y);
 	}
-	
-	/*
-	 
-	 public void rotateToPlayer(double x, double y) {
-		// Rotate towards player if mob is on screen
-		if(Main.getInstance().onScreen(x, y, getImage().getWidth(), getImage().getHeight())) {
-			
-			double rotate = Math.atan2((Main.getInstance().getOptions().getHeight() / 2) - y, (Main.getInstance().getOptions().getWidth() / 2) - x);
-			setRotation(Math.toDegrees(rotate));
-			
-			image = Sprites.rotate(getMobImage(), getRotation());
-
-		}
-	}
-	 
-	 public void walkToPlayer(double x, double y) {
-		int playerX = (Main.getInstance().getOptions().getWidth() / 2);
-		int playerY = (Main.getInstance().getOptions().getHeight() / 2);
-		//int diffX = (playerX - x);
-		//int diffY = (playerY - y);
-		
-		int speedX = (playerX > x ? getSpeed() : playerX < x ? -getSpeed() : 0);
-		int speedY = (playerY > y ? getSpeed() : playerY < y ? -getSpeed() : 0);
-
-		getPosition().setX(getPosition().getX() + speedX);
-		getPosition().setY(getPosition().getY() + speedY);
-		
-		//if(diffX > diffY) {
-		//	double speedX = (playerX > x ? getSpeed() : -getSpeed());
-		//	double speedY = (playerY > y ? getSpeed() : -getSpeed());
-		//	getPosition().setX((int)(getPosition().getX() + speedX));
-		//	getPosition().setY((int)(getPosition().getY() + speedY));
-		//} else {
-		//	double speedX = (playerX > x ? getSpeed() : -getSpeed());
-		//	double speedY = (playerY > y ? getSpeed() : -getSpeed());
-		//	getPosition().setX((int)(getPosition().getX() + speedX));
-		//	getPosition().setY((int)(getPosition().getY() + speedY));
-		//}
-		
-		//System.out.println("DIFF X: " + diffX + ", diffY: " + diffY);
-	}
-	 
-	 */
 	
 	public void increaseMovementTicks() {
 		movementTicks++;
@@ -210,6 +174,18 @@ public abstract class Entity {
 
 	public void setMovementTicks(int movementTicks) {
 		this.movementTicks = movementTicks;
+	}
+
+	public int getHurtTicks() {
+		return hurtTicks;
+	}
+
+	public void setHurtTicks(int hurtTicks) {
+		this.hurtTicks = hurtTicks;
+	}
+	
+	public void setHurt() {
+		this.hurtTicks = HURT_TICKS;
 	}
 	
 }

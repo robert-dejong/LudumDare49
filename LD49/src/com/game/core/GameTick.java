@@ -35,6 +35,12 @@ public class GameTick implements Runnable {
 		player.tick();
 		taskManager.tick();
 		worldManager.tick();
+		
+		worldManager.getEntitiesToRemove().forEach((entity) -> {
+			worldManager.getEntities().remove(entity);
+		});
+		
+		worldManager.getEntitiesToRemove().clear();
 	}
 	
 	@Override

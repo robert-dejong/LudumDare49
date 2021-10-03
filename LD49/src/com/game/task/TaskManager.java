@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 import com.dependencyinjection.Inject;
 import com.game.task.tasks.DoubleVisionEffectTask;
+import com.game.task.tasks.GenerateBackgroundTask;
+import com.game.task.tasks.IncreaseDifficultyTask;
 import com.game.task.tasks.MovePlayerTask;
 import com.game.task.tasks.ScoreTask;
 import com.game.task.tasks.SpawnCarTask;
+import com.game.task.tasks.SpawnItemTask;
+import com.game.task.tasks.SpawnObstacleTask;
 
 public class TaskManager {
 	
@@ -22,6 +26,18 @@ public class TaskManager {
 	@Inject
 	private SpawnCarTask spawnCarTask;
 	
+	@Inject
+	private SpawnObstacleTask spawnObstacleTask;
+	
+	@Inject
+	private SpawnItemTask spawnItemTask;
+	
+	@Inject
+	private IncreaseDifficultyTask increaseDifficultyTask;
+	
+	@Inject
+	private GenerateBackgroundTask generateBackgroundTask;
+	
 	private ArrayList<Task> tasks = new ArrayList<Task>();
 	
 	public void init() {
@@ -29,6 +45,10 @@ public class TaskManager {
 		add(movePlayerTask);
 		add(scoreTask);
 		add(spawnCarTask);
+		add(spawnObstacleTask);
+		add(spawnItemTask);
+		add(increaseDifficultyTask);
+		add(generateBackgroundTask);
 	}
 	
 	public void tick() {
@@ -58,6 +78,7 @@ public class TaskManager {
 	
 	public void add(Task task) {
 		tasks.add(task);
+		task.onCreate();
 	}
 
 }
