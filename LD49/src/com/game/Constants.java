@@ -2,7 +2,7 @@ package com.game;
 
 public class Constants {
 	
-	public final static String TITLE = "Drunkenness Simulator";
+	public final static String TITLE = "Walking Home Simulator";
 	public final static String DATA_PATH = "./data";
 	
 	public final static int RENDER_SCALE = 4;
@@ -21,6 +21,5 @@ public class Constants {
 	
 	public final static int SCORE_INCREASE_RATE = 3;
 	
-	public final static int PICKUP_BEER_SCORE_INCREASE = 100;
-	public final static int PICKUP_NEEDLE_SCORE_INCREASE = 250;
+	public final static int PICKUP_BEER_SCORE_INCREASE = 250;
 }

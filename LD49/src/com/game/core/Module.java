@@ -2,7 +2,9 @@ package com.game.core;
 
 import com.dependencyinjection.InjectionModule;
 import com.game.GameRules;
+import com.game.RestartGame;
 import com.game.core.input.KeyboardInput;
+import com.game.core.input.MouseInput;
 import com.game.core.render.Render;
 import com.game.entity.player.Player;
 import com.game.entity.player.PlayerInput;
@@ -40,5 +42,7 @@ public class Module extends InjectionModule {
 		this.bindSingleton(PlayerStats.class);
 		this.bindSingleton(GameRules.class);
 		this.bindSingleton(GenerateBackgroundTask.class);
+		this.bindSingleton(RestartGame.class);
+		this.bindSingleton(MouseInput.class);
 	}
 }

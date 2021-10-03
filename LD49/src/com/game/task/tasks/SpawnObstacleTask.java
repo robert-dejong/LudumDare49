@@ -42,17 +42,11 @@ public class SpawnObstacleTask extends Task {
 		
 		int id = (int)(Math.random() * OBSTACLE_COUNT) + 1;
 		double x = (int)(Math.random() * 120) + player.getX() + (Constants.TILE_SIZE * 10);
-		double y = Constants.MIN_Y_POSITION + (int)(Math.random() * (Constants.MAX_Y_POSITION - Constants.MIN_Y_POSITION));
+		double y = Constants.MIN_Y_POSITION + (int)(Math.random() * 35);
 		
 		Entity entity = getEntity(id, x, y);
 		
 		worldManager.addEntity(entity);
-		
-		if(spawnAnotherObstacle()) {
-			execute();
-			System.out.println("SPAWNED another obstacle");
-		}
-		
 		ticksToWait = getNextSpawnTicks();
 	}
 	
@@ -67,17 +61,6 @@ public class SpawnObstacleTask extends Task {
 		}
 		
 		return null;
-	}
-	
-	private boolean spawnAnotherObstacle() {
-		int chance = 10;
-		
-		chance = chance - (gameRules.getDifficultyLevel() / 10);
-		
-		if(chance < 2)
-			chance = 2;
-		
-		return (int)(Math.random() * chance) == 0;
 	}
 
 }

@@ -10,7 +10,7 @@ public class IncreaseDifficultyTask extends Task {
 	private GameRules gameRules;
 	
 	public IncreaseDifficultyTask() {
-		super(180, true);
+		super(120, true);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class IncreaseDifficultyTask extends Task {
 		}
 		
 		if(difficultyLevel <= 10) {
-			gameRules.increasePlayerMovementSpeed(0.05);
+			gameRules.increaseObstacleSpawnRate(1);
 		}
 		
 		if(difficultyLevel <= 20) {
@@ -31,29 +31,29 @@ public class IncreaseDifficultyTask extends Task {
 		}
 		
 		if(difficultyLevel <= 30) {
-			gameRules.increaseObstacleSpawnRate(5);
+			gameRules.increasePlayerMovementSpeed(0.011);
+			gameRules.increaseObstacleSpawnRate(4);
 			gameRules.decreaseMinimumCarSpawnRate(2);
 		}
 		
 		if(difficultyLevel <= 50) {
 			gameRules.decreaseItemSpawnRate(3);
 			gameRules.decreaseMinimumObstacleSpawnRate(2);
+			gameRules.increasePlayerMovementSpeed(0.012);
 		}
 		
 		if(difficultyLevel >= 50 && difficultyLevel <= 75) {
 			gameRules.decreaseItemSpawnRate(5);
-			gameRules.increasePlayerMovementSpeed(0.03);
+			gameRules.increasePlayerMovementSpeed(0.015);
 			gameRules.increaseCarSpeed(0.02);
 			gameRules.increaseObstacleSpawnRate(1);
 		}
 		
 		if(difficultyLevel > 75) {
-			gameRules.increasePlayerMovementSpeed(0.02);
-			gameRules.increaseCarSpeed(0.02);
+			gameRules.increasePlayerMovementSpeed(0.007);
+			gameRules.increaseCarSpeed(0.01);
 			gameRules.decreaseItemSpawnRate(3);
 		}
-		
-		System.out.println("Difficulty: " + difficultyLevel + ", playerSpeed: " + gameRules.getPlayerMovementSpeed() + ", carSpeed: " + gameRules.getCarSpeed() + ", carSpawnRate: " + gameRules.getCarSpawnRate() + ", obstacleSpawnRate: " + gameRules.getObstacleSpawnRate() + ", itemSpawnRate: " + gameRules.getItemSpawnRate() + ", minimumCarSpawnRate: " + gameRules.getMinimumCarSpawnRate() + ", minimumObstacleSpawnRate: " + gameRules.getMinimumObstacleSpawnRate());
 	}
 
 }

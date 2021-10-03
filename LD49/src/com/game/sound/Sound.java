@@ -16,11 +16,14 @@ public class Sound {
 	private AudioClip clip;
 	
 	public Sound(String file) {
+		String path = Constants.DATA_PATH + "/sounds/" + file;
 		try {
-			this.clip = Applet.newAudioClip(new File(Constants.DATA_PATH + "/sounds/" + file).toURI().toURL());
+			this.clip = Applet.newAudioClip(new File(path).toURI().toURL());
 		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//this.clip = Applet.newAudioClip(ImageLoader.class.getClass().getResource(path));
 	}
 	
 	public void play() {

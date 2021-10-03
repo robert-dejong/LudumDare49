@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import com.dependencyinjection.Inject;
 import com.game.Constants;
 import com.game.core.input.KeyboardInput;
+import com.game.core.input.MouseInput;
 import com.game.core.render.Render;
 
 public class Screen extends JFrame {
@@ -16,6 +17,9 @@ public class Screen extends JFrame {
 	
 	@Inject
 	private KeyboardInput keyboardInput;
+	
+	@Inject
+	private MouseInput mouseInput;
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -28,6 +32,7 @@ public class Screen extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		render.addKeyListener(keyboardInput);
+		render.addMouseListener(mouseInput);
 		this.add(render);
 		this.revalidate();
 		render.requestFocus();

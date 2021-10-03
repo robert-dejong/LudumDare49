@@ -11,6 +11,8 @@ public class Sprites {
 	public static BufferedImage playerRight2;
 	public static BufferedImage playerDamagedRight1;
 	public static BufferedImage playerDamagedRight2;
+	public static BufferedImage playerHealedRight1;
+	public static BufferedImage playerHealedRight2;
 	
 	// Item entities
 	public static BufferedImage beer;
@@ -29,6 +31,8 @@ public class Sprites {
 		playerRight2 = player.getSprite(1, 2);
 		playerDamagedRight1 = player.getSprite(1, 3);
 		playerDamagedRight2 = player.getSprite(1, 4);
+		playerHealedRight1 = player.getSprite(1, 5);
+		playerHealedRight2 = player.getSprite(1, 6);
 		
 		carMovingLeft = ImageLoader.loadImage("/sprites/entities/car_left.png");
 		carMovingRight = ImageLoader.loadImage("/sprites/entities/car_right.png");

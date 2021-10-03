@@ -7,7 +7,7 @@ import com.game.task.Task;
 public class DoubleVisionEffectTask extends Task {
 	
 	private final static int TICKS_TO_WAIT = 40;
-	private final static int MAX_OFFSET = 2;
+	private final static int MAX_OFFSET = 3;
 	
 	@Inject
 	private Render render;

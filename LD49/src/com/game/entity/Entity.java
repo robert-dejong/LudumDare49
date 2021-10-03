@@ -13,7 +13,7 @@ import com.game.world.WorldManager;
 public abstract class Entity {
 	
 	public final static int MOVEMENT_ANIMATION_TICKS = 18;
-	public final static int HURT_TICKS = 6;
+	public final static int HURT_TICKS = 6, HEALED_TICKS = 6;
 	
 	public WorldManager worldManager = Injector.getInstance(WorldManager.class);
 	public PlayerStats playerStats = Injector.getInstance(PlayerStats.class);
@@ -22,6 +22,7 @@ public abstract class Entity {
 	private MovementDirection movementDirection = MovementDirection.LEFT;
 	private int movementTicks = 0;
 	private int hurtTicks = 0;
+	private int healedTicks = 0;
 	private double x;
 	private double y;
 	
@@ -41,6 +42,10 @@ public abstract class Entity {
 	public void tick() {
 		if(this.hurtTicks > 0) {
 			this.hurtTicks--;
+		}
+		
+		if(this.healedTicks > 0) {
+			this.healedTicks--;
 		}
 	}
 	
@@ -80,7 +85,7 @@ public abstract class Entity {
 		int otherY2 = (int) (otherY - (otherHeight / 2));
 		
 		int otherMaxX = otherX2 + otherWidth;
-		int otherMaxY = otherY2 + otherHeight;
+		int otherMaxY = otherY2 + otherHeight - 4;
 		
 		return maxX >= otherX2 && x2 <= otherMaxX
 				&& maxY > otherY2 && y2 + entityHeight <= otherMaxY;
@@ -186,6 +191,18 @@ public abstract class Entity {
 	
 	public void setHurt() {
 		this.hurtTicks = HURT_TICKS;
+	}
+
+	public int getHealedTicks() {
+		return healedTicks;
+	}
+
+	public void setHealedTicks(int healedTicks) {
+		this.healedTicks = healedTicks;
+	}
+	
+	public void setHealed() {
+		this.healedTicks = HEALED_TICKS;
 	}
 	
 }

@@ -18,7 +18,9 @@ public class WorldManager {
 	}
 	
 	public void init() {
-		spawnEntities();
+		this.backgrounds.clear();
+		this.entities.clear();
+		this.entitiesToRemove.clear();
 	}
 	
 	public void tick() {
@@ -41,10 +43,6 @@ public class WorldManager {
 			
 			entity.render(render);
 		});
-	}
-	
-	public void spawnEntities() {
-		
 	}
 	
 	public ArrayList<Entity> getEntities() {

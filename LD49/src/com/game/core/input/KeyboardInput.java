@@ -29,5 +29,9 @@ public class KeyboardInput implements KeyListener {
 	public void setPressed(int keycode, boolean pressed) {
 		keysPressed[keycode] = pressed;
 	}
+	
+	public void releaseAllKeys() {
+		this.keysPressed = new boolean[1024];
+	}
 
 }

@@ -13,9 +13,12 @@ public class PlayerStats {
 	private int health;
 	private DamageReason reasonLastDamage;
 	private int distance;
+	private boolean isInMainMenu;
+	private boolean disableDoubleVisionEffect;
 	
 	public PlayerStats() { 
 		init();
+		setInMainMenu(true);
 	}
 	
 	public void init() {
@@ -23,6 +26,7 @@ public class PlayerStats {
 		this.distance = 0;
 		this.health = Constants.PLAYER_MAX_HEALTH;
 		this.setReasonLastDamage(DamageReason.UNKNOWN);
+		this.setInMainMenu(false);
 	}
 	
 	public void addScore(int amount) {
@@ -51,6 +55,7 @@ public class PlayerStats {
 	
 	public void addHealth(int amount) {
 		this.health += amount;
+		player.setHealed();
 		
 		if(this.health > Constants.PLAYER_MAX_HEALTH) {
 			this.health = Constants.PLAYER_MAX_HEALTH;
@@ -83,6 +88,22 @@ public class PlayerStats {
 
 	public void setDistance(int distance) {
 		this.distance = distance;
+	}
+
+	public boolean isInMainMenu() {
+		return isInMainMenu;
+	}
+
+	public void setInMainMenu(boolean isInMainMenu) {
+		this.isInMainMenu = isInMainMenu;
+	}
+	
+	public void toggleDoubleVisionEffect() {
+		this.disableDoubleVisionEffect = !this.disableDoubleVisionEffect;
+	}
+
+	public boolean isDisableDoubleVisionEffect() {
+		return disableDoubleVisionEffect;
 	}
 	
 }

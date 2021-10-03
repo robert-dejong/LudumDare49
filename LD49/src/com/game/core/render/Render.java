@@ -78,22 +78,48 @@ public class Render extends Canvas {
 		g2.setColor(Color.BLACK);
 		g2.fillRect(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight());
 		
+		if(playerStats.isInMainMenu()) {
+			g.drawImage(bufferedImage, 0, 0, null);
+			
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Arial", Font.BOLD, 6));
+			g.drawString("Walking Home Simulator", 59, 17);
+			
+			g.setFont(new Font("Arial", Font.BOLD, 4));
+			g.drawString("Controls: Arrows up/down to move up/down", 59, 30);
+			g.drawString("Your goal is to try to get home (except the game is endless)", 59, 40);
+			g.drawString("Avoid getting hit by cars and stepping into broken glass", 59, 50);
+			g.drawString("Picking up beer will heal you", 59, 60);
+			
+			g.setFont(new Font("Arial", Font.BOLD, 5));
+			g.drawRect(60, 70, 76, 14);
+			g.drawString("Click here to start the game", 65, 79);
+			
+			g.setFont(new Font("Arial", Font.BOLD, 4));
+			g.drawRect(7, 135, 68, 9);
+			g.drawString("Double vision effect: " + (!playerStats.isDisableDoubleVisionEffect() ? "ENABLED" : "DISABLED"), 11, 141);
+			
+			g.dispose();
+			bs.show();
+			return;
+		}
+		
 		worldManager.render(this);
 		player.render(this);
 		
 		AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, Constants.DOUBLE_VISION_TRANSPARENCY);
 		g.setComposite(ac);
-		g.drawImage(bufferedImage, doubleVisionOffset, doubleVisionOffset, null);
+		
+		if(!playerStats.isDisableDoubleVisionEffect()) {
+			g.drawImage(bufferedImage, doubleVisionOffset, doubleVisionOffset, null);
+		}
 		
 		g.drawImage(bufferedImage, 0, 0, null);
 		
 		ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f);
 		g.setComposite(ac);
 		
-		// Debug
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("Arial", Font.PLAIN, 5));
-		g.drawString(player.getX() + ", " + player.getY(), 5, getHeight() - 5);
 		
 		// Player stats
 		g.setFont(new Font("Arial", Font.BOLD, 4));
@@ -115,8 +141,10 @@ public class Render extends Canvas {
 			int renderX = playerStats.getReasonLastDamage().getRenderX();
 			g.setFont(new Font("Arial", Font.BOLD, 5));
 			g.setColor(Color.WHITE);
-			g.drawString(deathReason, renderX, 73);
-			g.drawString("Score: " + playerStats.getScore(), 85, 80);
+			g.drawString(deathReason, renderX, 65);
+			g.drawString("Score: " + playerStats.getScore(), 85, 73);
+			g.drawString("Press ENTER to restart", 68, 86);
+			g.drawString("Press ESCAPE to return to the main menu", 50, 96);
 		}
 		
 		g.dispose();

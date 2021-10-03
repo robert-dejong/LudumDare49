@@ -19,7 +19,7 @@ public class BeerItemEntity extends ItemEntity {
 	
 	@Override
 	public void onCollide() {
-		playerStats.addHealth(1);
+		playerStats.addHealth(3);
 		playerStats.addScore(Constants.PICKUP_BEER_SCORE_INCREASE);
 		super.onCollide();
 	}

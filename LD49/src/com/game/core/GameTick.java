@@ -3,6 +3,7 @@ package com.game.core;
 import com.dependencyinjection.Inject;
 import com.game.core.render.Render;
 import com.game.entity.player.Player;
+import com.game.entity.player.PlayerInput;
 import com.game.entity.player.PlayerStats;
 import com.game.task.TaskManager;
 import com.game.world.WorldManager;
@@ -24,12 +25,17 @@ public class GameTick implements Runnable {
 	@Inject
 	private PlayerStats playerStats;
 	
+	@Inject
+	private PlayerInput playerInput;
+	
 	public void init() {
 		new Thread(this).start();
 	}
 	
 	private void tick() {
-		if (playerStats.getHealth() <= 0)
+		playerInput.handleKeyInput();
+		
+		if (playerStats.getHealth() <= 0 || playerStats.isInMainMenu())
 			return;
 		
 		player.tick();
@@ -48,8 +54,6 @@ public class GameTick implements Runnable {
 		double delta = 0;
 		double nsPerTick = 1000000000.0 / 60;
 		long last = System.nanoTime();
-		long lastFps = System.currentTimeMillis();
-		int frames = 0;
 		
 		while(true) {
 			long now = System.nanoTime();
@@ -67,14 +71,7 @@ public class GameTick implements Runnable {
 				e.printStackTrace();
 			}
 			
-			if(System.currentTimeMillis() - lastFps >= 1000) {
-				lastFps = System.currentTimeMillis();
-				System.out.println("FPS: " + frames);
-				frames = 0;
-			}
-			
 			render.render();
-			frames++;
 		}
 	}
 

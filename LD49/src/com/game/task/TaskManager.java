@@ -80,5 +80,11 @@ public class TaskManager {
 		tasks.add(task);
 		task.onCreate();
 	}
+	
+	public void reset() {
+		tasks.forEach((task) -> {
+			task.setTicks(task.getInitialTicks());
+		});
+	}
 
 }
