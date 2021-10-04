@@ -3,6 +3,8 @@ Entry for Ludum Dare 49 (October 2021)
 
 The entire game was created within the weekend of 2-3 october 2021.
 
+Link to entry: [Ludum Dare 49 Entry - Walking Home Simulator](https://ldjam.com/events/ludum-dare/49/walking-home-simulator)
+
 # Instructions
 You are walking home after a night of heavy drinking, how far can you get without getting hit by a car or dying from stepping into broken glass?
 
